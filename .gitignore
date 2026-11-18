@@ -26,3 +26,6 @@ results/testcases/
 
 # Tệp đang tải dở
 *.part
+
+# Script dựng báo cáo: chỉ để trên máy nhóm, không đưa lên git
+report/
