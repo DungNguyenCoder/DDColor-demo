@@ -29,3 +29,10 @@ results/testcases/
 
 # Script dựng báo cáo: chỉ để trên máy nhóm, không đưa lên git
 report/
+
+# Tài liệu (báo cáo, slide, bản PDF): chỉ để trên máy, không đưa lên git
+*.docx
+*.doc
+*.pdf
+*.pptx
+*.ppt
