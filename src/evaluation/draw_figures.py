@@ -49,29 +49,17 @@ def pipeline():
 
 
 def ambiguity():
-    """Hai màu khác hẳn nhau nhưng cùng L* -> cùng một mức xám."""
-    red = np.array([[[1.0, 0.0, 0.0]]]); Lr = rgb_to_lab(red)[0, 0, 0]
-    # tìm màu lục và lam có cùng L*
-    def match(axis):
-        lo, hi = 0.0, 1.0
-        for _ in range(60):
-            mid = (lo + hi) / 2; c = np.zeros((1, 1, 3)); c[0, 0, axis] = mid
-            if axis == 2:
-                c[0, 0, 1] = mid * 0.55
-            if rgb_to_lab(c)[0, 0, 0] < Lr: lo = mid
-            else: hi = mid
-        c = np.zeros((1, 1, 3)); c[0, 0, axis] = mid
-        if axis == 2: c[0, 0, 1] = mid * 0.55
-        return c
-    cols = [red, match(1), match(2)]
+    """Ba màu 8 bit khác hẳn nhau nhưng L* gần bằng nhau -> cùng mức xám 8 bit."""
+    cols = [(255, 0, 0), (0, 148, 0), (0, 128, 232)]
     fig, axes = plt.subplots(2, 3, figsize=(8, 4.2))
     rows = []
-    for j, c in enumerate(cols):
-        lab = rgb_to_lab(c)[0, 0]; rgb8 = np.rint(c[0, 0] * 255).astype(int)
-        g = lab.copy(); g[1:] = 0; gray = lab_to_rgb(g[None, None])[0, 0]
-        axes[0, j].imshow(np.ones((20, 20, 3)) * c[0, 0]); axes[0, j].set_title(f"RGB {tuple(rgb8)}\nL*={lab[0]:.1f} a*={lab[1]:.0f} b*={lab[2]:.0f}", fontsize=8)
-        axes[1, j].imshow(np.ones((20, 20, 3)) * gray); axes[1, j].set_title("ảnh xám (giữ L*)", fontsize=8)
-        rows.append({"rgb": tuple(rgb8), "L": round(lab[0], 2), "a": round(lab[1], 2), "b": round(lab[2], 2)})
+    for j, rgb8 in enumerate(cols):
+        c = np.array(rgb8, float) / 255
+        lab = rgb_to_lab(c[None, None])[0, 0]
+        g = lab.copy(); g[1:] = 0; gray8 = int(np.rint(lab_to_rgb(g[None, None])[0, 0, 0] * 255))
+        axes[0, j].imshow(np.ones((20, 20, 3)) * c); axes[0, j].set_title(f"RGB {rgb8}\nL*={lab[0]:.2f} a*={lab[1]:.2f} b*={lab[2]:.2f}", fontsize=8)
+        axes[1, j].imshow(np.ones((20, 20, 3)) * gray8 / 255); axes[1, j].set_title(f"ảnh xám (giữ L*): mức {gray8}", fontsize=8)
+        rows.append({"rgb": rgb8, "L": round(lab[0], 2), "a": round(lab[1], 2), "b": round(lab[2], 2), "gray8": gray8})
     for a in axes.ravel(): a.axis("off")
     plt.tight_layout(); plt.savefig(os.path.join(FIG, "ambiguity.png"), dpi=130); plt.close(fig)
     pd.DataFrame(rows).to_csv(os.path.join(ROOT, "results", "ambiguity.csv"), index=False); print(rows)

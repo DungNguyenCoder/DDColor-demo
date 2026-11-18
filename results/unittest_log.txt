@@ -1,25 +1,5 @@
-test_close_to_opencv (test_lab_metrics.TestLab.test_close_to_opencv) ... ok
-test_gray_has_zero_ab (test_lab_metrics.TestLab.test_gray_has_zero_ab) ... ok
-test_gray_input_keeps_L (test_lab_metrics.TestLab.test_gray_input_keeps_L) ... ok
-test_known_colors (test_lab_metrics.TestLab.test_known_colors) ... ok
-test_matches_skimage (test_lab_metrics.TestLab.test_matches_skimage) ... ok
-test_round_trip (test_lab_metrics.TestLab.test_round_trip) ... ok
-test_colorfulness_gray_is_zero (test_lab_metrics.TestMetrics.test_colorfulness_gray_is_zero) ... ok
-test_colorfulness_hand_example (test_lab_metrics.TestMetrics.test_colorfulness_hand_example) ... ok
-test_psnr_hand_example (test_lab_metrics.TestMetrics.test_psnr_hand_example) ... ok
-test_all_weights_loaded (test_methods.TestModels.test_all_weights_loaded) ... ok
-test_cic_output_range (test_methods.TestModels.test_cic_output_range) ... ok
-test_ddcolor_shape_and_luminance (test_methods.TestModels.test_ddcolor_shape_and_luminance) ... ok
-test_gray_and_color_input_same_output (test_methods.TestModels.test_gray_and_color_input_same_output) ... ok
-test_param_counts_match_paper (test_methods.TestModels.test_param_counts_match_paper) ... ok
-test_query_maps (test_methods.TestModels.test_query_maps) ... ok
-test_weight_hash (test_methods.TestModels.test_weight_hash) ... ok
-test_box_mean_hand (test_methods.TestWelsh.test_box_mean_hand) ... ok
-test_descriptor_unit_norm (test_methods.TestWelsh.test_descriptor_unit_norm) ... ok
-test_keeps_luminance (test_methods.TestWelsh.test_keeps_luminance) ... ok
-test_transfers_matching_colors (test_methods.TestWelsh.test_transfers_matching_colors) ... ok
-
+....................
 ----------------------------------------------------------------------
-Ran 20 tests in 3.857s
+Ran 20 tests in 3.835s
 
 OK
