@@ -58,7 +58,8 @@ python src/evaluation/experiments.py queries robustness timing welsh_ref
 python src/evaluation/draw_figures.py pipeline ambiguity testcases compare_coco failures
 python src/evaluation/run_functional_tests.py   # 16 test case chức năng, gồm chạy giao diện
 
-# Báo cáo Word (đường dẫn ra mặc định trong report/build_report.py)
+# Báo cáo Word (đường dẫn ra mặc định trong report/build_report.py). Trên Windows có Microsoft Word,
+# script tự tính sẵn mục lục, danh mục bảng/hình (report/finalize_word.ps1) và xuất kèm bản PDF xem trước.
 python report/build_report.py
 ```
 
