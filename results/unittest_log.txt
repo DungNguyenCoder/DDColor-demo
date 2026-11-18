@@ -1,3 +1,5 @@
+test_16bit_keeps_brightness (test_lab_metrics.TestImageIO.test_16bit_keeps_brightness) ... ok
+test_alpha_on_white_and_resize (test_lab_metrics.TestImageIO.test_alpha_on_white_and_resize) ... ok
 test_close_to_opencv (test_lab_metrics.TestLab.test_close_to_opencv) ... ok
 test_gray_has_zero_ab (test_lab_metrics.TestLab.test_gray_has_zero_ab) ... ok
 test_gray_input_keeps_L (test_lab_metrics.TestLab.test_gray_input_keeps_L) ... ok
@@ -11,6 +13,7 @@ test_all_weights_loaded (test_methods.TestModels.test_all_weights_loaded) ... ok
 test_cic_output_range (test_methods.TestModels.test_cic_output_range) ... ok
 test_ddcolor_shape_and_luminance (test_methods.TestModels.test_ddcolor_shape_and_luminance) ... ok
 test_gray_and_color_input_same_output (test_methods.TestModels.test_gray_and_color_input_same_output) ... ok
+test_input_size_per_call (test_methods.TestModels.test_input_size_per_call) ... ok
 test_param_counts_match_paper (test_methods.TestModels.test_param_counts_match_paper) ... ok
 test_query_maps (test_methods.TestModels.test_query_maps) ... ok
 test_weight_hash (test_methods.TestModels.test_weight_hash) ... ok
@@ -20,6 +23,6 @@ test_keeps_luminance (test_methods.TestWelsh.test_keeps_luminance) ... ok
 test_transfers_matching_colors (test_methods.TestWelsh.test_transfers_matching_colors) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 4.123s
+Ran 23 tests in 4.581s
 
 OK

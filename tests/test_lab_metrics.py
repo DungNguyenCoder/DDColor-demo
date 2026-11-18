@@ -55,5 +55,30 @@ class TestMetrics(unittest.TestCase):
         self.assertAlmostEqual(psnr(a + 10, a), 28.13, places=2)
 
 
+
+
+class TestImageIO(unittest.TestCase):
+    """Hàm đọc ảnh dùng chung của giao diện (src/utils/image_io.py)."""
+
+    def test_alpha_on_white_and_resize(self):
+        import io
+        from PIL import Image
+        from src.utils.image_io import read_image
+        im = Image.new("RGBA", (3000, 1000), (255, 0, 0, 0))            # hoàn toàn trong suốt -> nền trắng
+        b = io.BytesIO(); im.save(b, format="PNG"); b.seek(0)
+        a, orig = read_image(b)
+        self.assertEqual(orig, (3000, 1000)); self.assertEqual(a.shape, (683, 2048, 3))
+        self.assertEqual(int(a.min()), 255)
+
+    def test_16bit_keeps_brightness(self):
+        import io
+        from PIL import Image
+        from src.utils.image_io import read_image
+        g = (np.arange(256, dtype=np.uint16).reshape(16, 16) * 257)
+        b = io.BytesIO(); Image.fromarray(g).save(b, format="PNG"); b.seek(0)
+        a, _ = read_image(b)
+        np.testing.assert_array_equal(a[..., 0], np.arange(256).reshape(16, 16))
+
+
 if __name__ == "__main__":
     unittest.main()

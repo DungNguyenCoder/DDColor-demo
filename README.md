@@ -39,10 +39,10 @@ python scripts/download_weights.py      # DDColor tiny/large/modelscope (~2 GB) 
 ## Chạy
 
 ```bash
-# Demo (hoặc nháy đúp run_app.bat), mở http://localhost:8501
+# Demo (hoặc nháy đúp run_app.bat: tự mở trình duyệt), mở http://localhost:8501
 python -m streamlit run src/app/app.py
 
-# Kiểm thử tự động
+# Kiểm thử tự động (23 trường hợp)
 python -m unittest discover -s tests
 
 # Đánh giá trên COCO val2017 (5.000 ảnh) và chú thích đối tượng
@@ -56,7 +56,7 @@ python src/evaluation/summarize.py
 python src/evaluation/prepare_testcases.py
 python src/evaluation/experiments.py queries robustness timing welsh_ref
 python src/evaluation/draw_figures.py pipeline ambiguity testcases compare_coco failures
-python src/evaluation/run_functional_tests.py
+python src/evaluation/run_functional_tests.py   # 16 test case chức năng, gồm chạy giao diện
 
 # Báo cáo Word (đường dẫn ra mặc định trong report/build_report.py)
 python report/build_report.py
@@ -75,5 +75,6 @@ Xem `results/coco_final.csv`. FID thấp hơn là tốt hơn; ΔCF là chênh l�
 ## Ghi chú
 
 - Chỉ suy luận bằng trọng số chính thức của tác giả; không huấn luyện lại DDColor.
+- `.streamlit/config.toml` tắt bước hỏi email ở lần chạy Streamlit đầu tiên; `scripts/download_weights.py` kiểm tra mã băm SHA-256 của trọng số.
 - Dữ liệu COCO và trọng số không đưa lên git (xem `.gitignore`); tải lại bằng `scripts/`.
 - Nhóm dùng công cụ AI hỗ trợ viết mã; mọi kết quả đã được chạy lại và kiểm chứng bằng `tests/` và các script đánh giá.

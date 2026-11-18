@@ -5,7 +5,7 @@ Tạo bộ ảnh test case (data/testcases):
   func/   ảnh cho kiểm thử chức năng (ảnh lớn, ảnh nhỏ, kích thước lẻ, PNG có alpha, JPG, ảnh 1 kênh)
 Nguồn: bộ ảnh mẫu của scikit-image (giấy phép trong skimage/data/README) và COCO val2017.
 """
-import os, sys
+import os
 import numpy as np
 from PIL import Image
 import skimage.data as sd
@@ -31,6 +31,11 @@ def main():
     save(sd.logo(), "func", "rgba_logo.png")
     Image.fromarray(base).save(os.path.join(T, "func", "photo.jpg"), quality=85)
     save(sd.camera(), "func", "single_channel.png")
+    # ảnh điện thoại: điểm ảnh lưu nằm ngang, thẻ EXIF Orientation = 6 (cần xoay 90° theo chiều kim đồng hồ khi hiển thị)
+    ex = Image.Exif(); ex[0x0112] = 6
+    Image.fromarray(base).save(os.path.join(T, "func", "exif_rotated.jpg"), quality=90, exif=ex)
+    # ảnh xám 16 bit (0..65535)
+    Image.fromarray((sd.camera().astype(np.uint16) * 257)).save(os.path.join(T, "func", "gray16.png"))
     print("Đã tạo", sum(len(f) for _, _, f in os.walk(T)), "ảnh")
 
 

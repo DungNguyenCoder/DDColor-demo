@@ -6,7 +6,7 @@ Các thí nghiệm phụ (chạy sau evaluate_coco.py):
   welsh_ref   : ảnh hưởng của ảnh mẫu tới phương pháp Welsh
   python src/evaluation/experiments.py queries robustness timing welsh_ref
 """
-import os, sys, io, time, json
+import os, sys, io, time
 import numpy as np
 import pandas as pd
 from PIL import Image, ImageFilter

@@ -39,7 +39,6 @@ def run_method(name, files, out_dir, args):
     elif name == "welsh":
         # Ảnh mẫu: ảnh khác trong kho có ảnh xám giống nhất (không dùng chính ảnh đó)
         pool = sorted(os.listdir(GT))
-        labs = {}
         desc = np.stack([welsh.gray_descriptor(rgb_to_lab(load(os.path.join(GT, f)) / 255.0)[..., 0]) for f in tqdm(pool, desc="descriptor")])
         index = {f: i for i, f in enumerate(pool)}
         for f in tqdm(files, desc=name):
@@ -84,6 +83,9 @@ def main():
     ap.add_argument("--input_size", type=int, default=256)
     ap.add_argument("--tag", default="")
     args = ap.parse_args()
+    if args.limit and not args.tag:          # chạy thử trên tập nhỏ: không ghi đè kết quả 5.000 ảnh
+        args.tag = f"_limit{args.limit}"
+        print("--limit không kèm --tag: ghi kết quả vào hậu tố", args.tag)
     files = sorted(os.listdir(GT))
     if args.limit:
         files = files[:args.limit]

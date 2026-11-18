@@ -1,12 +1,17 @@
 ﻿ID,Nội dung,Kết quả,Ghi chú
-F01,Ảnh lớn 4000 × 3000,Đạt,"đầu vào 2048×1536, đầu ra cùng kích thước; mạng 324 ms, cả pipeline 409 ms"
-F02,Ảnh rất nhỏ 32 × 32,Đạt,"đầu vào 32×32, đầu ra cùng kích thước; mạng 110 ms, cả pipeline 115 ms"
-F03,Ảnh kích thước lẻ 401 × 299,Đạt,"đầu vào 401×299, đầu ra cùng kích thước; mạng 106 ms, cả pipeline 114 ms"
-F04,PNG có kênh alpha,Đạt,"đầu vào 500×500, đầu ra cùng kích thước; mạng 105 ms, cả pipeline 115 ms"
-F05,Ảnh JPG,Đạt,"đầu vào 600×400, đầu ra cùng kích thước; mạng 114 ms, cả pipeline 123 ms"
-F06,Ảnh 1 kênh (xám),Đạt,"đầu vào 512×512, đầu ra cùng kích thước; mạng 109 ms, cả pipeline 166 ms"
+F01,Ảnh lớn 4000 × 3000,Đạt,"đầu vào 2048×1536, đầu ra cùng kích thước; mạng 327 ms, cả pipeline 413 ms"
+F02,Ảnh rất nhỏ 32 × 32,Đạt,"đầu vào 32×32, đầu ra cùng kích thước; mạng 112 ms, cả pipeline 116 ms"
+F03,Ảnh kích thước lẻ 401 × 299,Đạt,"đầu vào 401×299, đầu ra cùng kích thước; mạng 109 ms, cả pipeline 116 ms"
+F04,PNG có kênh alpha,Đạt,"đầu vào 500×500, đầu ra cùng kích thước; mạng 110 ms, cả pipeline 120 ms"
+F05,Ảnh JPG,Đạt,"đầu vào 600×400, đầu ra cùng kích thước; mạng 111 ms, cả pipeline 121 ms"
+F06,Ảnh 1 kênh (xám),Đạt,"đầu vào 512×512, đầu ra cùng kích thước; mạng 114 ms, cả pipeline 173 ms"
 F07,Ảnh màu có ảnh chuẩn: hiển thị kết quả và độ đo,Đạt,"các chỉ số hiển thị: PSNR (dB), Độ sặc sỡ CF, CF ảnh chuẩn"
 F08,Tải ảnh kết quả,Đạt,có nút tải ảnh PNG
 F09,"Ảnh xám thật, không có ảnh chuẩn",Đạt,hiện thông báo thay cho PSNR
 F10,Chưa chọn ảnh,Đạt,"hiện hướng dẫn, chương trình không dừng"
 F11,Chọn phương pháp Welsh và ảnh mẫu,Đạt,"hiện ô chọn ảnh mẫu, chạy không lỗi"
+F12,Chạy lần lượt mọi phương pháp,Đạt,7 phương pháp chạy không lỗi
+F13,So sánh tất cả phương pháp,Đạt,"bảng so sánh có 7 dòng (thời gian, CF, PSNR)"
+F14,Đổi kích thước đầu vào 256/384/512,Đạt,chạy không lỗi ở cả ba kích thước
+F15,Ảnh điện thoại có thẻ xoay EXIF,Đạt,"đọc thành ảnh đứng 400×600 đúng chiều hiển thị, tô màu được"
+F16,Ảnh xám 16 bit,Đạt,"độ sáng lệch tối đa 0 mức so với bản 8 bit, tô màu được"

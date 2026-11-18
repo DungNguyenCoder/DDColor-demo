@@ -14,16 +14,17 @@ if ROOT not in sys.path:
 from src.models.lab import rgb_to_lab, lab_to_rgb
 from src.models import welsh
 from src.utils.metrics import psnr, colorfulness
+from src.utils.image_io import read_image as _read, MAX_SIDE
 
 st.set_page_config(page_title="DDColor – Tô màu ảnh xám", layout="wide")
 TC = os.path.join(ROOT, "data", "testcases")
-MAX_SIDE = 2048
 
 
 @st.cache_resource
-def get_ddcolor(name, size):
+def get_ddcolor(name):
+    """Mỗi bản DDColor chỉ nạp một lần; kích thước đầu vào truyền khi tô màu nên đổi kích thước không nạp thêm mô hình."""
     from src.models.ddcolor_runner import DDColorRunner
-    return DDColorRunner(name, input_size=size)
+    return DDColorRunner(name)
 
 
 @st.cache_resource
@@ -42,14 +43,14 @@ def gray_of(rgb):
 
 
 def read_image(f):
-    im = Image.open(f)
-    if im.mode in ("RGBA", "LA", "P"):
-        im = im.convert("RGBA"); bg = Image.new("RGBA", im.size, (255, 255, 255, 255)); im = Image.alpha_composite(bg, im)
-    im = im.convert("RGB")
-    if max(im.size) > MAX_SIDE:                                   # ảnh quá lớn: thu nhỏ để không tràn bộ nhớ
-        s = MAX_SIDE / max(im.size); im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
-        st.info(f"Ảnh lớn được thu nhỏ về {im.width} × {im.height} để xử lý.")
-    return np.asarray(im)
+    try:
+        a, (w, h) = _read(f)
+    except Exception as e:                                         # tệp hỏng hoặc không phải ảnh
+        st.error(f"Không đọc được ảnh: {e}")
+        return None
+    if max(w, h) > MAX_SIDE:
+        st.info(f"Ảnh lớn {w} × {h} được thu nhỏ về {a.shape[1]} × {a.shape[0]} để xử lý.")
+    return a
 
 
 def png_bytes(a):
@@ -60,7 +61,7 @@ def run(method, rgb, size, ref=None):
     t0 = time.perf_counter()
     if method.startswith("DDColor"):
         name = {"DDColor-L (paper)": "large", "DDColor-L (modelscope)": "modelscope", "DDColor-T (tiny)": "tiny"}[method]
-        out, ms = get_ddcolor(name, size).colorize(rgb)
+        out, ms = get_ddcolor(name).colorize(rgb, input_size=size)
         return out, ms
     lab = rgb_to_lab(rgb / 255.0)
     if method == "CIC (Zhang 2016)":
@@ -73,6 +74,19 @@ def run(method, rgb, size, ref=None):
     else:
         lab[..., 1:] = 0; out = to_u8(lab_to_rgb(lab))
     return out, (time.perf_counter() - t0) * 1000
+
+
+@st.cache_data(max_entries=64, show_spinner=False)
+def run_cached(method, rgb, size, ref=None):
+    """Giữ kết quả theo (phương pháp, ảnh, kích thước, ảnh mẫu): mỗi lần bấm nút Streamlit chạy lại cả trang,
+    nên không có bộ nhớ đệm thì mọi tab đều tô màu lại từ đầu."""
+    return run(method, rgb, size, ref)
+
+
+@st.cache_data(max_entries=16, show_spinner=False)
+def query_maps(rgb, size):
+    out, _, maps = get_ddcolor("large").colorize(rgb, return_maps=True, input_size=size)
+    return out, maps
 
 
 METHODS = ["DDColor-L (paper)", "DDColor-L (modelscope)", "DDColor-T (tiny)", "CIC (Zhang 2016)", "Welsh 2002 (ảnh mẫu)",
@@ -109,7 +123,8 @@ with tabs[0]:
         if method.startswith("Welsh"):
             refname = st.selectbox("Ảnh mẫu màu", sorted(os.listdir(os.path.join(TC, "color"))))
             ref = read_image(os.path.join(TC, "color", refname))
-        out, ms = run(method, rgb, size, ref)
+        with st.spinner("Đang tô màu..."):
+            out, ms = run_cached(method, rgb, size, ref)
         cols = st.columns(3 if gt is not None else 2)
         cols[0].image(gray_of(rgb), caption="Ảnh xám đầu vào", width="stretch")
         cols[1].image(out, caption=f"{method} – {ms:.0f} ms", width="stretch")
@@ -132,7 +147,7 @@ with tabs[1]:
         cells = st.columns(3); i = 0
         rows = []
         for m in METHODS:
-            out, ms = run(m, rgb, size, ref)
+            out, ms = run_cached(m, rgb, size, ref)
             cap = f"{m} – {ms:.0f} ms"
             r = {"Phương pháp": m, "Thời gian (ms)": round(ms, 1), "CF": round(colorfulness(out), 1)}
             if gt is not None:
@@ -144,7 +159,7 @@ with tabs[1]:
 with tabs[2]:
     if rgb is not None:
         method = st.selectbox("Phương pháp để xem kênh", METHODS[:4], key="labm")
-        out, _ = run(method, rgb, size)
+        out, _ = run_cached(method, rgb, size)
         lab = rgb_to_lab(out / 255.0)
         c = st.columns(4)
         c[0].image(out, caption="Kết quả", width="stretch")
@@ -155,8 +170,7 @@ with tabs[2]:
 
 with tabs[3]:
     if rgb is not None:
-        r = get_ddcolor("large", size)
-        out, _, maps = r.colorize(rgb, return_maps=True)
+        out, maps = query_maps(rgb, size)
         k = st.slider("Số query hiển thị", 3, 12, 6)
         from src.models.ddcolor_runner import diverse_queries
         order, act = diverse_queries(maps, k)
@@ -176,6 +190,10 @@ with tabs[4]:
                  "ground_truth": "Ảnh gốc"}
         df = pd.read_csv(p)[["method", "FID", "CF", "dCF", "PSNR", "ms"]]
         df["method"] = df.method.map(lambda m: names.get(m, m))
+        gt_row = df.method == "Ảnh gốc"
+        for c in ["FID", "CF", "dCF", "PSNR"]:                  # ô không áp dụng (ảnh gốc, PSNR trống) hiện "–"
+            df[c] = [("–" if pd.isna(v) or (g and c != "CF") else f"{v:.2f}") for v, g in zip(df[c], gt_row)]
+        df["ms"] = ["–" if pd.isna(v) or v == 0 else f"{v:.1f}" for v in df["ms"]]
         st.dataframe(df.rename(columns={"method": "Phương pháp", "dCF": "ΔCF", "ms": "ms/ảnh"}), hide_index=True, width="stretch")
         st.caption("FID, ΔCF càng thấp càng tốt. PSNR bỏ qua giá trị vô cực của ảnh vốn xám.")
         for f, c in [("compare_coco.png", "So sánh trên 5 ảnh COCO chọn ngẫu nhiên"), ("failures.png", "Các loại ảnh DDColor-L làm chưa tốt")]:

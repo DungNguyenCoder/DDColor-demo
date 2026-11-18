@@ -2,7 +2,7 @@
 .venv/
 __pycache__/
 *.pyc
-.streamlit/
+.streamlit/secrets.toml
 
 # Dữ liệu lớn: tải lại bằng scripts (xem README)
 data/raw/
@@ -23,3 +23,6 @@ data/testcases/func/large_4000x3000.png
 
 # Kết quả test case (tạo lại bằng draw_figures.py testcases)
 results/testcases/
+
+# Tệp đang tải dở
+*.part

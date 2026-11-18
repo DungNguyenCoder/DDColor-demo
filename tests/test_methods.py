@@ -76,6 +76,15 @@ class TestModels(unittest.TestCase):
         _, _, maps = self.dd.colorize(np.zeros((64, 64, 3), np.uint8), return_maps=True)
         self.assertEqual(maps.shape[0], 100)                                   # K = 100 color query
 
+    def test_input_size_per_call(self):
+        # mô hình dựng ở 512 nhưng chạy với input_size=256 phải cho kết quả như mô hình dựng ở 256
+        from src.models.ddcolor_runner import DDColorRunner
+        x = (np.random.default_rng(5).random((96, 128, 3)) * 255).astype(np.uint8)
+        other = DDColorRunner("tiny", input_size=512, device=self.dd.device)
+        a, _ = self.dd.colorize(x)
+        b, _ = other.colorize(x, input_size=256)
+        self.assertLessEqual(np.abs(a.astype(int) - b.astype(int)).max(), 1)
+
     def test_cic_output_range(self):
         ab = self.cic.colorize_L(np.full((50, 70), 60.0))
         self.assertEqual(ab.shape, (50, 70, 2)); self.assertLess(np.abs(ab).max(), 110)

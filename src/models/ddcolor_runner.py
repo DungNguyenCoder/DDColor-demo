@@ -14,7 +14,7 @@ if DD_DIR not in sys.path:
     sys.path.insert(0, DD_DIR)
 from ddcolor import DDColor  # noqa: E402
 
-MODELS = {"tiny": "ddcolor_paper_tiny", "large": "ddcolor_paper", "modelscope": "ddcolor_modelscope", "artistic": "ddcolor_artistic"}
+MODELS = {"tiny": "ddcolor_paper_tiny", "large": "ddcolor_paper", "modelscope": "ddcolor_modelscope"}
 
 
 def diverse_queries(maps, k=5):
@@ -59,16 +59,19 @@ class DDColorRunner:
         return sum(p.numel() for p in self.model.parameters())
 
     @torch.no_grad()
-    def colorize(self, rgb_u8, return_maps=False):
+    def colorize(self, rgb_u8, return_maps=False, input_size=None):
         """
         rgb_u8: HxWx3 uint8 (ảnh màu hoặc xám; chỉ dùng kênh L).
         Theo pipeline chính thức: lấy L của ảnh gốc, đưa ảnh xám (L, 0, 0) cỡ input_size vào mạng,
         phóng ab về kích thước gốc rồi ghép với L gốc.
+        input_size: kích thước đưa vào mạng cho lần gọi này (mặc định self.input_size). Mạng không phụ thuộc
+        kích thước lúc khởi tạo (chỉ dùng để dò số kênh), nên một mô hình dùng được cho mọi kích thước.
         """
+        size = int(input_size or self.input_size)
         img = rgb_u8.astype(np.float32) / 255.0
         h, w = img.shape[:2]
         orig_l = cv2.cvtColor(img, cv2.COLOR_RGB2Lab)[:, :, :1]
-        small = cv2.resize(img, (self.input_size, self.input_size))
+        small = cv2.resize(img, (size, size))
         l_small = cv2.cvtColor(small, cv2.COLOR_RGB2Lab)[:, :, :1]
         gray = cv2.cvtColor(np.concatenate([l_small, np.zeros_like(l_small), np.zeros_like(l_small)], -1), cv2.COLOR_LAB2RGB)
         t = torch.from_numpy(gray.transpose(2, 0, 1))[None].float().to(self.device)

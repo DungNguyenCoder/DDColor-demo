@@ -1,0 +1,8 @@
+# Cấu hình Streamlit cho demo (đọc khi chạy từ thư mục gốc dự án, ví dụ qua run_app.bat)
+[server]
+# không hỏi email ở lần chạy đầu và không tự mở trình duyệt (run_app.bat tự mở)
+headless = true
+port = 8501
+
+[browser]
+gatherUsageStats = false

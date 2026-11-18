@@ -3,7 +3,7 @@ Chuẩn bị tập kiểm tra từ COCO val2017 (5.000 ảnh, cũng là tập ki
   data/raw/val2017.zip  ->  data/coco256/gt/<id>.png   (cạnh ngắn 256, cắt giữa 256 x 256, PNG)
 Ghi thêm data/coco256/meta.csv: tên ảnh, kích thước gốc, ảnh gốc có phải ảnh xám không.
 """
-import os, sys, zipfile, io
+import os, zipfile, io
 import numpy as np
 import pandas as pd
 from PIL import Image

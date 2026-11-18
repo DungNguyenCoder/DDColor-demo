@@ -5,7 +5,7 @@ Tổng hợp kết quả COCO:
   - danh sách ảnh DDColor-L làm tệ nhất (PSNR thấp nhất, lệch CF lớn nhất) để phân tích thất bại.
 Xuất results/coco_final.csv, results/failure_candidates.csv
 """
-import os, sys
+import os
 import numpy as np
 import pandas as pd
 
