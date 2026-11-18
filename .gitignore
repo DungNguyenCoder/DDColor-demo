@@ -1,0 +1,25 @@
+# Môi trường, cache
+.venv/
+__pycache__/
+*.pyc
+.streamlit/
+
+# Dữ liệu lớn: tải lại bằng scripts (xem README)
+data/raw/
+data/coco256/
+results/coco256*/
+results/gt_subset*/
+
+# Trọng số mô hình: tải bằng scripts/download_weights.py
+weights/**/*.bin
+weights/**/*.pth
+weights/**/*.pt
+
+# Word tạm
+~$*.docx
+
+# Ảnh test lớn: tạo lại bằng src/evaluation/prepare_testcases.py
+data/testcases/func/large_4000x3000.png
+
+# Kết quả test case (tạo lại bằng draw_figures.py testcases)
+results/testcases/

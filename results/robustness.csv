@@ -1,0 +1,11 @@
+method,degradation,cf,dab_vs_clean,psnr_vs_gt
+DDColor-L,clean,45.27,0.0,23.34
+CIC,clean,38.49,0.0,22.25
+DDColor-L,noise,29.02,15.05,20.51
+CIC,noise,29.08,11.46,20.34
+DDColor-L,jpeg,30.47,10.7,22.34
+CIC,jpeg,32.82,9.21,21.25
+DDColor-L,blur,37.84,10.88,20.07
+CIC,blur,40.65,10.5,18.75
+DDColor-L,lowres,34.69,11.17,20.43
+CIC,lowres,36.18,8.98,19.38

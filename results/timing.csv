@@ -1,0 +1,11 @@
+model,device,input,ms_median
+DDColor-T,CUDA,256,17.8
+DDColor-T,CUDA,512,54.9
+DDColor-L,CUDA,256,32.6
+DDColor-L,CUDA,512,107.3
+CIC,CUDA,256,9.8
+DDColor-T,CPU,256,179.4
+DDColor-T,CPU,512,587.6
+DDColor-L,CPU,256,340.2
+CIC,CPU,256,109.7
+Welsh (NumPy),CPU,600x400,72.1

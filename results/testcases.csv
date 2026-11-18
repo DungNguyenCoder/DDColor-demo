@@ -1,0 +1,99 @@
+group,image,method,cf,psnr,cf_gt
+color,astronaut.png,Ảnh xám,0.0,17.8,72.61
+color,astronaut.png,Giả màu,196.27,6.81,72.61
+color,astronaut.png,Welsh,74.38,16.95,72.61
+color,astronaut.png,CIC,43.27,20.47,72.61
+color,astronaut.png,DDColor-T,91.2,17.69,72.61
+color,astronaut.png,DDColor-L,90.17,20.44,72.61
+color,astronaut.png,DDColor-L (modelscope),91.97,20.22,72.61
+color,chelsea.png,Ảnh xám,0.0,19.4,37.96
+color,chelsea.png,Giả màu,164.73,9.34,37.96
+color,chelsea.png,Welsh,74.34,18.28,37.96
+color,chelsea.png,CIC,31.63,26.62,37.96
+color,chelsea.png,DDColor-T,17.17,21.7,37.96
+color,chelsea.png,DDColor-L,15.44,21.31,37.96
+color,chelsea.png,DDColor-L (modelscope),32.06,27.04,37.96
+color,coffee.png,Ảnh xám,0.0,14.12,76.92
+color,coffee.png,Giả màu,188.19,7.15,76.92
+color,coffee.png,Welsh,37.41,18.49,76.92
+color,coffee.png,CIC,60.42,20.77,76.92
+color,coffee.png,DDColor-T,79.85,25.44,76.92
+color,coffee.png,DDColor-L,83.22,25.47,76.92
+color,coffee.png,DDColor-L (modelscope),75.46,25.28,76.92
+color,colorwheel.png,Ảnh xám,0.0,11.51,134.77
+color,colorwheel.png,Giả màu,202.6,4.64,134.77
+color,colorwheel.png,Welsh,68.68,10.26,134.77
+color,colorwheel.png,CIC,57.43,11.08,134.77
+color,colorwheel.png,DDColor-T,106.21,9.9,134.77
+color,colorwheel.png,DDColor-L,58.87,11.42,134.77
+color,colorwheel.png,DDColor-L (modelscope),103.83,9.92,134.77
+color,hubble_deep_field.png,Ảnh xám,0.0,31.28,15.48
+color,hubble_deep_field.png,Giả màu,136.46,3.75,15.48
+color,hubble_deep_field.png,Welsh,38.07,17.45,15.48
+color,hubble_deep_field.png,CIC,12.53,28.2,15.48
+color,hubble_deep_field.png,DDColor-T,32.37,23.4,15.48
+color,hubble_deep_field.png,DDColor-L,29.6,23.94,15.48
+color,hubble_deep_field.png,DDColor-L (modelscope),35.8,23.37,15.48
+color,immunohistochemistry.png,Ảnh xám,0.0,22.0,40.33
+color,immunohistochemistry.png,Giả màu,175.81,9.48,40.33
+color,immunohistochemistry.png,Welsh,76.51,15.56,40.33
+color,immunohistochemistry.png,CIC,29.37,23.43,40.33
+color,immunohistochemistry.png,DDColor-T,24.93,23.28,40.33
+color,immunohistochemistry.png,DDColor-L,42.92,24.07,40.33
+color,immunohistochemistry.png,DDColor-L (modelscope),47.63,22.71,40.33
+color,rocket.png,Ảnh xám,0.0,22.31,38.56
+color,rocket.png,Giả màu,150.36,5.55,38.56
+color,rocket.png,Welsh,65.29,12.59,38.56
+color,rocket.png,CIC,43.57,25.22,38.56
+color,rocket.png,DDColor-T,46.02,27.02,38.56
+color,rocket.png,DDColor-L,45.3,26.98,38.56
+color,rocket.png,DDColor-L (modelscope),44.35,29.02,38.56
+gray,camera.png,Ảnh xám,0.0,,
+gray,camera.png,Giả màu,187.33,,
+gray,camera.png,Welsh,73.72,,
+gray,camera.png,CIC,50.77,,
+gray,camera.png,DDColor-T,52.02,,
+gray,camera.png,DDColor-L,50.12,,
+gray,camera.png,DDColor-L (modelscope),50.01,,
+gray,cell.png,Ảnh xám,0.0,,
+gray,cell.png,Giả màu,134.04,,
+gray,cell.png,Welsh,75.66,,
+gray,cell.png,CIC,31.11,,
+gray,cell.png,DDColor-T,62.0,,
+gray,cell.png,DDColor-L,59.41,,
+gray,cell.png,DDColor-L (modelscope),59.4,,
+gray,clock.png,Ảnh xám,0.0,,
+gray,clock.png,Giả màu,128.96,,
+gray,clock.png,Welsh,78.5,,
+gray,clock.png,CIC,30.44,,
+gray,clock.png,DDColor-T,83.41,,
+gray,clock.png,DDColor-L,57.87,,
+gray,clock.png,DDColor-L (modelscope),78.81,,
+gray,coins.png,Ảnh xám,0.0,,
+gray,coins.png,Giả màu,181.32,,
+gray,coins.png,Welsh,71.55,,
+gray,coins.png,CIC,35.07,,
+gray,coins.png,DDColor-T,38.27,,
+gray,coins.png,DDColor-L,49.91,,
+gray,coins.png,DDColor-L (modelscope),46.14,,
+gray,moon.png,Ảnh xám,0.0,,
+gray,moon.png,Giả màu,94.51,,
+gray,moon.png,Welsh,74.63,,
+gray,moon.png,CIC,43.11,,
+gray,moon.png,DDColor-T,56.6,,
+gray,moon.png,DDColor-L,28.56,,
+gray,moon.png,DDColor-L (modelscope),35.66,,
+gray,page.png,Ảnh xám,0.0,,
+gray,page.png,Giả màu,180.52,,
+gray,page.png,Welsh,76.02,,
+gray,page.png,CIC,35.11,,
+gray,page.png,DDColor-T,4.12,,
+gray,page.png,DDColor-L,29.82,,
+gray,page.png,DDColor-L (modelscope),32.75,,
+gray,text.png,Ảnh xám,0.0,,
+gray,text.png,Giả màu,139.85,,
+gray,text.png,Welsh,73.21,,
+gray,text.png,CIC,19.9,,
+gray,text.png,DDColor-T,9.64,,
+gray,text.png,DDColor-L,25.12,,
+gray,text.png,DDColor-L (modelscope),45.54,,
