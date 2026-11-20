@@ -39,6 +39,9 @@ class TestWelsh(unittest.TestCase):
 class TestModels(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        for w in ("weights/cic/colorization_release_v2-9b330a0b.pth", "weights/ddcolor_paper_tiny/pytorch_model.bin"):
+            if not os.path.exists(os.path.join(ROOT, w)):
+                raise FileNotFoundError(f"Thiếu {w}: chạy python scripts/download_weights.py trước")
         from src.models.cic import CICRunner
         from src.models.ddcolor_runner import DDColorRunner
         cls.cic = CICRunner()

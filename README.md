@@ -27,13 +27,23 @@ Dự án giải thích và kiểm chứng DDColor, so sánh với:
 
 ## Cài đặt
 
+Cần Python 3.10–3.13 (khi cài nhớ tick *Add python.exe to PATH*) và mạng để tải khoảng 3–5 GB lần đầu.
+Trọng số mô hình (~2 GB) không nằm trong git, phải tải về sau khi clone.
+
+**Windows, cách nhanh:** nháy đúp `setup.bat` (tạo `.venv`, cài PyTorch bản GPU nếu máy có card NVIDIA, không thì bản CPU,
+cài thư viện và tải trọng số), sau đó nháy đúp `run_app.bat`. Chạy thẳng `run_app.bat` trên máy mới cũng tự gọi `setup.bat`.
+
+**Cài tay** (Windows; Linux/macOS dùng `source .venv/bin/activate`):
+
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124   # máy không có GPU NVIDIA: thay cu124 bằng cpu
 pip install -r requirements.txt
 python scripts/download_weights.py      # DDColor tiny/large/modelscope (~2 GB) + CIC (~130 MB)
 ```
+
+Không có GPU vẫn chạy được, chỉ chậm hơn (DDColor-L khoảng 0,3–0,4 s mỗi ảnh 256 × 256 trên CPU của nhóm).
 
 ## Chạy
 

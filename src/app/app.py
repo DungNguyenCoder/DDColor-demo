@@ -95,6 +95,14 @@ METHODS = ["DDColor-L (paper)", "DDColor-L (modelscope)", "DDColor-T (tiny)", "C
 st.title("Tô màu ảnh xám – DDColor (ICCV 2023)")
 st.caption("Bài tập lớn Xử lý ảnh – Nhóm 15. Ảnh màu được chuyển về xám (giữ kênh L của Lab) trước khi tô; ảnh gốc dùng làm ảnh chuẩn.")
 
+WEIGHTS = [os.path.join("weights", d, f) for d in ("ddcolor_paper", "ddcolor_paper_tiny", "ddcolor_modelscope")
+           for f in ("config.json", "pytorch_model.bin")] + [os.path.join("weights", "cic", "colorization_release_v2-9b330a0b.pth")]
+missing = [w for w in WEIGHTS if not os.path.exists(os.path.join(ROOT, w))]
+if missing:                       # máy mới clone về: trọng số (~2 GB) không nằm trong git
+    st.error("Chưa có trọng số mô hình: " + ", ".join(missing) + ". Chạy `python scripts/download_weights.py` "
+             "(hoặc nháy đúp setup.bat) rồi tải lại trang.")
+    st.stop()
+
 with st.sidebar:
     src = st.radio("Nguồn ảnh", ["Ảnh màu có ảnh chuẩn", "Ảnh xám thật", "Tải ảnh lên"])
     rgb, gt, name = None, None, "anh.png"

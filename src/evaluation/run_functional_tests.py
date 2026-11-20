@@ -23,6 +23,10 @@ def rec(i, desc, ok, note):
 
 
 def image_cases(dd):
+    big = os.path.join(FUNC, "large_4000x3000.png")
+    if not os.path.exists(big):          # ảnh ~20 MB không đưa lên git; tạo lại giống prepare_testcases.py
+        import skimage.data as sd
+        Image.fromarray(sd.coffee()).resize((4000, 3000), Image.BICUBIC).save(big)
     cases = [("F01", "large_4000x3000.png", "Ảnh lớn 4000 × 3000"), ("F02", "tiny_32x32.png", "Ảnh rất nhỏ 32 × 32"),
              ("F03", "odd_401x299.png", "Ảnh kích thước lẻ 401 × 299"), ("F04", "rgba_logo.png", "PNG có kênh alpha"),
              ("F05", "photo.jpg", "Ảnh JPG"), ("F06", "single_channel.png", "Ảnh 1 kênh (xám)")]

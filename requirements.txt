@@ -1,16 +1,17 @@
-# PyTorch: cài bản phù hợp GPU, ví dụ CUDA 12.4:
-#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
-numpy
-opencv-python
-scikit-image
-pillow
-pandas
-matplotlib
-scipy
-tqdm
-timm
-huggingface_hub
-torch-fidelity
-streamlit
-python-docx
-playwright  # chỉ cần cho src/evaluation/capture_demo.py
+# Python 3.10-3.13. On Windows the easiest way is to double-click setup.bat (installs all of this and downloads the weights).
+# Install PyTorch first, matching the machine:
+#   NVIDIA GPU: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+#   CPU only:   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# Upper bounds on major versions so future releases do not break the project; versions in comments are the ones tested.
+numpy>=1.26,<3          # 2.5.4
+opencv-python>=4.8,<6   # 5.1.0
+scikit-image>=0.22,<1   # 0.26.0
+pillow>=10,<14          # 13.0.0
+pandas>=2,<4            # 3.1.1
+matplotlib>=3.8,<4      # 3.11.2
+scipy>=1.11,<2          # 1.18.1
+tqdm>=4.66,<5           # 4.70.1
+timm>=0.9,<2            # 1.0.31 (ConvNeXt in the DDColor code)
+torch-fidelity>=0.3,<1  # 0.4.0 (FID, COCO evaluation only)
+streamlit>=1.35,<2      # 1.67.0
+# Only for src/evaluation/capture_demo.py (UI screenshots): pip install playwright && playwright install chromium
